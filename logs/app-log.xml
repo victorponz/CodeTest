@@ -1,11 +1,6 @@
 
-  <Event xmlns="http://logging.apache.org/log4j/2.0/events" timeMillis="1718088576235" thread="main" level="ERROR" loggerName="TestRunner" endOfBatch="false" loggerFqcn="org.apache.logging.log4j.spi.AbstractLogger" threadId="1" threadPriority="5">
-    <Instant epochSecond="1718088576" nanoOfSecond="235982246"/>
-    <Message>exitVal: 1, error: 
-/home/victorponz/Documentos/repos/CodeTest/io/Afortunados.java:4: error: cannot find symbol
-        ArrayList&lt;Integer> numeros = new AArrayList&lt;Integer>();
-                                         ^
-  symbol:   class AArrayList
-  location: class Afortunados
-1 error, output: </Message>
+  <Event xmlns="http://logging.apache.org/log4j/2.0/events" timeMillis="1718098992621" thread="main" level="INFO" loggerName="Lanzar" endOfBatch="false" loggerFqcn="org.apache.logging.log4j.spi.AbstractLogger" threadId="1" threadPriority="5">
+    <Instant epochSecond="1718098992" nanoOfSecond="621273359"/>
+    <Marker name="RESULT"/>
+    <Message>0</Message>
   </Event>

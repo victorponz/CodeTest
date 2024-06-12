@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Afortunados {
     public static String calcular(int num){
-        ArrayList<Integer> numeros = new ArrayList<Integer>(); 
+        ArrayList<Integer> numeros = new ArrayList<Integer>();
         String res = "";
         int cuantos = 2;
         for (int i = 1; i <= num; i++) {

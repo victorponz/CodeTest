@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: 11.0.11 (Red Hat, Inc.)
+Main-Class: Lanzar
+

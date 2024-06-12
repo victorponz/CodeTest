@@ -1,3 +1,4 @@
-.class
-.zip
-
+*.class
+*.zip
+target/
+io/
