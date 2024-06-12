@@ -1,6 +1,0 @@
-
-  <Event xmlns="http://logging.apache.org/log4j/2.0/events" timeMillis="1718098992621" thread="main" level="INFO" loggerName="Lanzar" endOfBatch="false" loggerFqcn="org.apache.logging.log4j.spi.AbstractLogger" threadId="1" threadPriority="5">
-    <Instant epochSecond="1718098992" nanoOfSecond="621273359"/>
-    <Marker name="RESULT"/>
-    <Message>0</Message>
-  </Event>

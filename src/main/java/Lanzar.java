@@ -9,9 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 public class Lanzar {
+   //docker run -v $(pwd)/io:/io codetest Afortunados dd
+    
     public static void main(String[] args) throws IOException {
-        //
         Path path = Paths.get("io/" + args[1]);
+        System.out.println(System.getProperty("user.dir") + "/io/" +  args[1]);
         try {
             // Create the directory
             Files.createDirectory(path);

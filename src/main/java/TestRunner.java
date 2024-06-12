@@ -101,7 +101,7 @@ public class TestRunner {
             //Primero hay que compilar el programa y el test
             // javac -cp junit.jar Sum.java SumTest.java
             //Como los archivos de test están en el directorio "io", lo hemos de incluir en el classpath (-cp)
-            final Process command = re.exec("java -jar /usr/bin/junit.jar -cp ./io --select-class " + className +"Test --reports-dir io/" + resultsPath);
+            final Process command = re.exec("java -jar /usr/bin/junit.jar -cp . --select-class " + className +"Test --reports-dir io/" + resultsPath);
             this.error = new BufferedReader(new InputStreamReader(command.getErrorStream()));
             this.op = new BufferedReader(new InputStreamReader(command.getInputStream()));
 
@@ -109,10 +109,14 @@ public class TestRunner {
             command.waitFor();
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
-                //En este caso no escribimos en el log ya que el resultado se encuentra en TEST-junit-vintage.xml
-                return false;            }
+                System.out.println(this.getExecutionLog());
+                log.writeError(this.getExecutionLog());
+                log.close();
+                return false;
+            }
 
         } catch (final IOException | InterruptedException e) {
+            System.out.println(e.getMessage());
             log.writeError(e.getMessage());
             log.close();
             return false;
