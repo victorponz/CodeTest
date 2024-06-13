@@ -109,8 +109,9 @@ public class TestRunner {
             command.waitFor();
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
-                System.out.println(this.getExecutionLog());
-                log.writeError(this.getExecutionLog());
+                //System.out.println(this.getExecutionLog());
+                //log.writeError(this.getExecutionLog());
+                // En este caso el error está en el fichero TEST-junit-vintage.xml
                 log.close();
                 return false;
             }

@@ -32,8 +32,24 @@ public class Log {
         fileWriter.flush();
 
     }
-
+    public void write(String xml) throws IOException {
+        fileWriter.write(xml);
+        fileWriter.write(System.lineSeparator());
+        fileWriter.flush();
+    }
     public void close() throws IOException {
         fileWriter.close();
+    }
+    public void writeTestFailure(String msg) throws IOException {
+        fileWriter.write("<failure><![CDATA[" + msg + "]]></failure>");
+        fileWriter.flush();
+        fileWriter.write(System.lineSeparator()); // Append a newline character
+        fileWriter.flush();
+    }
+    public void writeTesError(String msg) throws IOException {
+        fileWriter.write("<error><![CDATA[" + msg + "]]></error>");
+        fileWriter.flush();
+        fileWriter.write(System.lineSeparator()); // Append a newline character
+        fileWriter.flush();
     }
 }

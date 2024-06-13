@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.nio.file.Path;
 public class Lanzar {
    //docker run -v $(pwd)/io:/io codetest Afortunados dd
-    
+
     public static void main(String[] args) throws IOException {
         Path path = Paths.get("io/" + args[1]);
         System.out.println(System.getProperty("user.dir") + "/io/" +  args[1]);
@@ -33,12 +33,15 @@ public class Lanzar {
                 //logger.info(RESULT, 1); //"No compila"
                 log.writeExecutionCode(1);
             }else{
-                if (!a.run()) {
+                if (!a.run()) { //Ejecutar el test
                     //logger.info(RESULT, 2); //"Error en tiempo de ejecución"
                     log.writeExecutionCode(2);
+                    ParseXML p = new ParseXML(args[1]);
+                    p.parse();
                 }else{
                     //logger.info(RESULT, 0);//OK
                     log.writeExecutionCode(0);
+                    //Process XML File to extract info
                 }
             }
         } catch (Exception e) {
