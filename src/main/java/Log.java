@@ -7,8 +7,6 @@ public class Log {
 
     public Log(String resultsPath) throws IOException {
         fileWriter = new FileWriter("io/" + resultsPath + "/results.xml", true);
-        //file = new PrintWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get("io/" + resultsPath + "/results.xml"))),true);
-
     }
     public void writeHeader() throws IOException {
         fileWriter.write("<results>");
