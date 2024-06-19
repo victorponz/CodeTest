@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
 
 public class TestRunner {
 //https://stackoverflow.com/questions/1320476/execute-another-jar-in-a-java-program
@@ -13,12 +11,10 @@ public class TestRunner {
     private final String className;
     private final String resultsPath;
     private Log log;
-    //protected static final Logger logger = LogManager.getLogger();
     public TestRunner(String className, String resultsPath) throws IOException {
         this.className = className;
         this.resultsPath = resultsPath;
         log = new Log(this.resultsPath);
-
     }
 
     /**
@@ -53,7 +49,7 @@ public class TestRunner {
         } catch (final IOException | InterruptedException e) {
             System.out.println("Error general " + e.getMessage());
             log.writeError(e.getMessage());
-            return false;
+            System.exit(1);
         }
         return true;
     }
@@ -79,8 +75,6 @@ public class TestRunner {
             command.waitFor();
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
-                //System.out.println(this.getExecutionLog());
-                //log.writeError(this.getExecutionLog());
                 // En este caso el error está en el fichero TEST-junit-vintage.xml
                 log.close();
                 return false;
@@ -90,8 +84,7 @@ public class TestRunner {
             System.out.println(e.getMessage());
             log.writeError(e.getMessage());
             log.close();
-            return false;
-
+            System.exit(1);
         }
         return true;
 
