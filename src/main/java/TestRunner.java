@@ -12,7 +12,6 @@ public class TestRunner {
     private int exitVal;
     private final String className;
     private final String resultsPath;
-
     private Log log;
     //protected static final Logger logger = LogManager.getLogger();
     public TestRunner(String className, String resultsPath) throws IOException {
@@ -37,8 +36,7 @@ public class TestRunner {
             //Primero hay que compilar el programa y luego el test
             // javac -cp junit.jar Sum.java SumTest.java
             //Siempre se compila desde raíz dep proyecto
-            String s = System.getProperty("user.dir");
-            Process command = re.exec("javac  "+ System.getProperty("user.dir") + "/io/" + this.resultsPath + "/" + this.className + ".java");
+            Process command = re.exec("javac -cp " + this.resultsPath + " " + this.resultsPath +  "/" + this.className + ".java" + " "  + this.resultsPath + "/" + this.className + "Test.java -classpath .:/usr/bin/junit.jar");
             this.error = new BufferedReader(new InputStreamReader(command.getErrorStream()));
             this.op = new BufferedReader(new InputStreamReader(command.getInputStream()));
             
@@ -50,33 +48,14 @@ public class TestRunner {
                 log.writeError(this.getExecutionLog());
                 return false;
             }else{
-                System.out.println("Compila el programa " + this.className);
+                System.out.println("Compila el programa y el test" + this.className);
             }
-            //Se debe mover el .class del programa
-            command = re.exec("javac  "+ System.getProperty("user.dir") +  "/io/" + this.resultsPath + "/" + this.className + "Test.java -classpath .:/usr/bin/junit.jar");
-
-            //command = re.exec("javac "+ System.getProperty("user.dir") + "/io/" + this.className + "Test.java  -classpath .:/usr/bin/junit.jar");
-
-            this.error = new BufferedReader(new InputStreamReader(command.getErrorStream()));
-            this.op = new BufferedReader(new InputStreamReader(command.getInputStream()));
-            
-            // Wait for the application to Finish
-            command.waitFor();
-            this.exitVal = command.exitValue();
-            if (this.exitVal != 0) {
-                System.out.println("Error al compilar el test " + this.className + "Test");
-                log.writeError(this.getExecutionLog());
-                return false;
-            }else{
-                System.out.println("Compila el test " + this.className + "Test");
-                return true;
-            }
-
         } catch (final IOException | InterruptedException e) {
             System.out.println("Error general " + e.getMessage());
             log.writeError(e.getMessage());
             return false;
         }
+        return true;
     }
 
     /**
@@ -87,19 +66,12 @@ public class TestRunner {
     public boolean run() throws Exception {
         // Create run arguments for the
 
-        // final List<String> actualArgs = new ArrayList<String>();
-        // actualArgs.add(0, "java");
-        // actualArgs.add(1, "-jar");
-        // //actualArgs.add(2, "/usr/bin/junit.jar  -cp . --reports-dir /home/victorponz/Documentos/repos/JavaCorrector/salida --select-class AfortunadosTest");
-        // actualArgs.add(2, "/usr/bin/junit.jar  -cp . --reports-dir ./salida --select-class AfortunadosTest");
-        // //actualArgs.addAll(args);
         try {
             final Runtime re = Runtime.getRuntime();
             //Primero hay que compilar el programa y el test
             // javac -cp junit.jar Sum.java SumTest.java
             //Como los archivos de test están en el directorio "io", lo hemos de incluir en el classpath (-cp)
-            String s = "java -jar /usr/bin/junit.jar -cp . --select-class " + className +"Test --reports-dir io/" + resultsPath;
-            final Process command = re.exec("java -jar /usr/bin/junit.jar -cp ./io/" + resultsPath + " --select-class " +  className +"Test --reports-dir io/" + resultsPath);
+            final Process command = re.exec("java -jar /usr/bin/junit.jar -cp "  + resultsPath + " --select-class " +  className +"Test --reports-dir " + resultsPath);
             this.error = new BufferedReader(new InputStreamReader(command.getErrorStream()));
             this.op = new BufferedReader(new InputStreamReader(command.getInputStream()));
 
@@ -148,6 +120,5 @@ public class TestRunner {
         }
         return "exitVal: " + this.exitVal + ", error: " + error + ", output: " + output;
     }
-
 }
     
