@@ -1,10 +1,8 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
-public class Log {
+public class Results {
     FileWriter fileWriter;
-   public Log(String resultsPath) throws IOException {
+   public Results(String resultsPath) throws IOException {
         fileWriter = new FileWriter(resultsPath + "/results.xml", true);
     }
     public void writeHeader() throws IOException {

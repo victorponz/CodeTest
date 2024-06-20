@@ -10,11 +10,11 @@ public class TestRunner {
     private int exitVal;
     private final String className;
     private final String resultsPath;
-    private Log log;
+    private Results results;
     public TestRunner(String className, String resultsPath) throws IOException {
         this.className = className;
         this.resultsPath = resultsPath;
-        log = new Log(this.resultsPath);
+        results = new Results(this.resultsPath);
     }
 
     /**
@@ -41,14 +41,14 @@ public class TestRunner {
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
                 System.out.println("Error al compilar el programa " + this.className);
-                log.writeError(this.getExecutionLog());
+                results.writeError(this.getExecutionLog());
                 return false;
             }else{
                 System.out.println("Compila el programa y el test" + this.className);
             }
         } catch (final IOException | InterruptedException e) {
             System.out.println("Error general " + e.getMessage());
-            log.writeError(e.getMessage());
+            results.writeError(e.getMessage());
             System.exit(1);
         }
         return true;
@@ -76,14 +76,14 @@ public class TestRunner {
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
                 // En este caso el error está en el fichero TEST-junit-vintage.xml
-                log.close();
+                results.close();
                 return false;
             }
 
         } catch (final IOException | InterruptedException e) {
             System.out.println(e.getMessage());
-            log.writeError(e.getMessage());
-            log.close();
+            results.writeError(e.getMessage());
+            results.close();
             System.exit(1);
         }
         return true;

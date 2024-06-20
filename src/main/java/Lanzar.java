@@ -3,22 +3,21 @@ public class Lanzar {
      //docker run -v $(pwd)/io:/io codetest Afortunados dd
 
     public static void main(String[] args) throws IOException {
-        Log log = new Log(args[1]);
-        log.writeHeader();
+        Results results = new Results(args[1]);
+        results.writeHeader();
         TestRunner a = new TestRunner(args[0], args[1]);
         try {
             if (!a.compile()) {
-                log.writeExecutionCode(1);
+                results.writeExecutionCode(1);
             }else{
                 if (!a.run()) { //Ejecutar el test
-                    log.writeExecutionCode(2);
-ç
+                    results.writeExecutionCode(2);
                 }else{
-                    log.writeExecutionCode(0);
+                    results.writeExecutionCode(0);
                 }
             }
-            log.writeFooter();
-            log.close();
+            results.writeFooter();
+            results.close();
         } catch (Exception e) {
             // TODO: handle exception
             System.out.println(e.getMessage());

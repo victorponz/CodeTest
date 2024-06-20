@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO">
     <Appenders>
-        <File name="XMLFile" fileName="logs/app-log.xml" append="false">
+        <File name="XMLFile" fileName="logs/app-results.xml" append="false">
             <XMLLayout complete="false" compact="false" eventEol="true" />
         </File>
     </Appenders>
