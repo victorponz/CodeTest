@@ -76,7 +76,6 @@ public class TestRunner {
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
                 // En este caso el error está en el fichero TEST-junit-vintage.xml
-                results.close();
                 return false;
             }
 
