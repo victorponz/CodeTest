@@ -21,8 +21,7 @@ public class Results {
         fileWriter.flush();
     }
     public void writeError(String error) throws IOException {
-        fileWriter.write("<error><![CDATA[" + error + "]]></error>");
-        fileWriter.flush();
+        fileWriter.write("<error><![CDATA[" + System.lineSeparator() + error + "]]></error>");
         fileWriter.write(System.lineSeparator()); // Append a newline character
         fileWriter.flush();
 
