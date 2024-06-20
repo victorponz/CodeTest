@@ -1,6 +1,15 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class TestRunner {
 //https://stackoverflow.com/questions/1320476/execute-another-jar-in-a-java-program
@@ -76,6 +85,7 @@ public class TestRunner {
             this.exitVal = command.exitValue();
             if (this.exitVal != 0) {
                 // En este caso el error está en el fichero TEST-junit-vintage.xml
+                createTagError();
                 return false;
             }
 
@@ -89,6 +99,20 @@ public class TestRunner {
 
     }
 
+    public void  createTagError() throws ParserConfigurationException, IOException, SAXException {
+        Document doc;
+        Element root;
+        doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(this.resultsPath + "/TEST-junit-vintage.xml");
+        root = doc.getDocumentElement(); // apuntarà al elemento raíz.
+        NodeList failures = root.getElementsByTagName("failure");
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < failures.getLength(); i++) {
+            Element el = (Element) failures.item(i);
+            sb.append(el.getAttribute("message")).append("\n");
+        }
+        results.writeError(sb.toString());
+
+    }
     public String getExecutionLog() {
         String error = "";
         String line;
