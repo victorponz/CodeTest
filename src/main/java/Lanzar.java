@@ -12,8 +12,7 @@ public class Lanzar {
             }else{
                 if (!a.run()) { //Ejecutar el test
                     log.writeExecutionCode(2);
-                    ParseXML p = new ParseXML(args[1]);
-                    p.parse();
+ç
                 }else{
                     log.writeExecutionCode(0);
                 }
